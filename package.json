@@ -7,12 +7,20 @@
     "email": "takamrushclin@gmail.com"
   },
   "scripts": {
-    "serve:frontend": "nx serve frontend",
-    "serve:backend": "nx serve backend",
+    "dev": "nx run-many --target=dev,serve --projects=frontend,backend --parallel=2",
+    "dev:frontend": "nx dev frontend --port 4200",
+    "dev:backend": "nx serve backend --watch",
+    "build": "nx run-many --target=build --projects=frontend,backend",
     "build:frontend": "nx build frontend",
     "build:backend": "nx build backend",
+    "start": "nx run-many --target=start,serve --projects=frontend,backend --parallel=2",
+    "start:frontend": "nx start frontend",
+    "start:backend": "nx serve backend --configuration=production",
     "lint": "nx lint",
-    "test": "nx test"
+    "lint:fix": "nx lint --fix",
+    "test": "nx test",
+    "test:watch": "nx test --watch",
+    "clean": "nx reset"
   },
   "private": true,
   "dependencies": {
@@ -54,6 +62,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "babel-jest": "^30.0.2",
+    "concurrently": "^9.2.1",
     "cypress": "^15.6.0",
     "eslint": "^9.8.0",
     "eslint-config-next": "^16.0.1",
@@ -67,6 +76,7 @@
     "jest-environment-jsdom": "^30.0.2",
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
+    "nodemon": "^3.1.11",
     "nx": "22.2.3",
     "prettier": "^2.6.2",
     "ts-jest": "^29.4.0",

@@ -45,19 +45,29 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@nx/js:node",
+      "executor": "nx:run-commands",
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
       "options": {
-        "buildTarget": "backend:build",
-        "runBuildTargetDependencies": false
+        "commands": [
+          "webpack-cli build --node-env=development --watch",
+          "nodemon"
+        ],
+        "parallel": true,
+        "cwd": "backend"
       },
       "configurations": {
         "development": {
-          "buildTarget": "backend:build:development"
+          "commands": [
+            "webpack-cli build --node-env=development --watch",
+            "nodemon"
+          ],
+          "parallel": true
         },
         "production": {
-          "buildTarget": "backend:build:production"
+          "commands": [
+            "node ../dist/backend/main.js"
+          ],
+          "parallel": false
         }
       }
     },
